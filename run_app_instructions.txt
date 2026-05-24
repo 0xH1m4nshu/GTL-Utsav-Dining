@@ -1,0 +1,128 @@
+GTL Utsav Restaurant App - Run Instructions
+
+1. Start MySQL
+
+Make sure your MySQL server is running.
+
+2. Create the database and import the schema
+
+Run these commands in the normal Terminal, not inside the MySQL prompt:
+
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS gtl_utsav_db;"
+mysql -u root -p gtl_utsav_db < "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_backend/schema.sql"
+
+This method is easier and avoids SOURCE path issues inside the MySQL client.
+
+3. Update backend environment
+
+Open this file:
+
+/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_backend/.env
+
+Make sure this line is:
+
+MYSQL_HOST=127.0.0.1
+
+Use 127.0.0.1 instead of localhost so the Python MySQL client uses TCP and connects properly.
+
+Also confirm these values are correct:
+
+MYSQL_USER=root
+MYSQL_PASSWORD=your_mysql_password
+MYSQL_DB=gtl_utsav_db
+PORT=5001
+FRONTEND_URL=http://localhost:5173
+
+4. Run the backend
+
+Open a terminal and run:
+
+cd "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_backend"
+pip3 install -r requirements.txt
+python3 app.py
+
+Expected backend output:
+
+Running on http://127.0.0.1:5001
+
+5. If backend says port 5001 is already in use
+
+Run:
+
+lsof -i :5001
+
+Then kill the process using that port:
+
+kill -9 <PID>
+
+Example:
+
+kill -9 15261
+
+Then start the backend again:
+
+python3 app.py
+
+6. Run the frontend
+
+Open another terminal and run:
+
+cd "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_frontend"
+npm install
+npm run dev
+
+This project is configured to expose Vite on the LAN (`host: 0.0.0.0`) so phones can open QR links.
+If needed, you can also use:
+
+npm run dev -- --host 0.0.0.0
+
+The frontend should usually run at:
+
+http://localhost:5173
+
+If port 5173 is already busy, Vite may start on:
+
+http://localhost:5174
+
+7. Open the app
+
+Open the frontend URL in your browser:
+
+http://localhost:5173
+
+If that does not load, try:
+
+http://127.0.0.1:5173
+
+If Vite picked a different port, open the exact URL shown in the frontend terminal.
+
+Backend URL:
+
+http://127.0.0.1:5001
+
+8. Recommended order
+
+1. Start MySQL
+2. Import the schema
+3. Start backend
+4. Start frontend
+5. Open the frontend URL in browser
+
+9. Quick copy-paste commands
+
+Database:
+
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS gtl_utsav_db;"
+mysql -u root -p gtl_utsav_db < "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_backend/schema.sql"
+
+Backend:
+
+cd "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_backend"
+pip3 install -r requirements.txt
+python3 app.py
+
+Frontend:
+
+cd "/Users/mohitmohadikar/Downloads/Restaurant Software Application-3/gtl_restaurant_frontend"
+npm install
+npm run dev
