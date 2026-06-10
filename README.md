@@ -69,3 +69,6 @@ All user orders (online + dine-in) appear instantly in:
 - **Order Management** — view/update order status and payment
 - **Table Management** — tables auto-update to occupied when dine-in orders placed
 - **Reports & Analytics** — revenue and order data
+
+
+uploaded upto Phase VI
